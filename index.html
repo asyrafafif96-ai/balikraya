@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist Sofea</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #16a34a;
+      --primary-soft: #dcfce7;
+      --danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fdf2f8 0%, #f8fafc 100%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .progress-box {
+      background: var(--primary-soft);
+      color: #166534;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-save {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-reset {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+
+    .btn-toggle {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .section {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      margin-top: 18px;
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fcfcfd;
+    }
+
+    .item input[type="checkbox"] {
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .item label {
+      flex: 1;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .item.checked {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .item.checked label {
+      text-decoration: line-through;
+      color: #4b5563;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .item {
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Checklist Sofea</h1>
+      <p class="subtitle">Senarai barang untuk raya, harian, dan keperluan baby.</p>
+
+      <div class="topbar">
+        <div class="progress-box" id="progressText">0 / 34 selesai</div>
+        <div class="actions">
+          <button class="btn-save" onclick="saveChecklist()">Simpan</button>
+          <button class="btn-toggle" onclick="toggleAll(true)">Tick Semua</button>
+          <button class="btn-toggle" onclick="toggleAll(false)">Untick Semua</button>
+          <button class="btn-reset" onclick="resetChecklist()">Reset</button>
+        </div>
+      </div>
+
+      <div id="checklist"></div>
+
+      <p class="footer-note">
+        Checklist ini auto-save dalam browser.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const checklistData = [
+      {
+        title: "1. Baju raya",
+        items: [
+          "Pertama - Hijau & Dress nude tinybutton",
+          "Kedua - Purple",
+          "Ketiga - Pink"
+        ]
+      },
+      {
+        title: "2. Baju tidoq",
+        items: [
+          "babyshop - 5 pasang",
+          "bju aiskrim - 1 pasang",
+          "baju rabbit - 1 pasang"
+        ]
+      },
+      {
+        title: "3. Baju siang",
+        items: [
+          "7 pasang"
+        ]
+      },
+      {
+        title: "4. Baju jalan",
+        items: [
+          "Sweatshirt",
+          "Jeans biru n hitam",
+          "Baju skirt biru n nude",
+          "Baju tshirt putih"
+        ]
+      },
+      {
+        title: "5. Lain-lain",
+        items: [
+          "Selimut",
+          "Tuala",
+          "Kain bedung",
+          "Bib",
+          "Stokin",
+          "Tisu",
+          "Wet tisu",
+          "Ketip kuku",
+          "Rantai emas",
+          "Alatan makeup",
+          "Ubat-ubat",
+          "Kasut raya",
+          "Getah rambut",
+          "Gel rambut",
+          "Susu",
+          "Sabun botol",
+          "Sabun baju",
+          "Sudu",
+          "Pampers",
+          "Botol susu",
+          "Botol ayaq",
+          "Kain sapu tgn",
+          "Toto n bantal"
+        ]
+      }
+    ];
+
+    const storageKey = "checklist-sofea-v1";
+
+    function buildChecklist() {
+      const container = document.getElementById("checklist");
+      container.innerHTML = "";
+
+      checklistData.forEach((section, sectionIndex) => {
+        const sectionDiv = document.createElement("div");
+        sectionDiv.className = "section";
+
+        const title = document.createElement("h2");
+        title.textContent = section.title;
+        sectionDiv.appendChild(title);
+
+        const list = document.createElement("div");
+        list.className = "list";
+
+        section.items.forEach((itemText, itemIndex) => {
+          const id = `item-${sectionIndex}-${itemIndex}`;
+
+          const item = document.createElement("div");
+          item.className = "item";
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.id = id;
+          checkbox.dataset.key = id;
+
+          const label = document.createElement("label");
+          label.htmlFor = id;
+          label.textContent = itemText;
+
+          checkbox.addEventListener("change", () => {
+            item.classList.toggle("checked", checkbox.checked);
+            saveChecklist();
+            updateProgress();
+          });
+
+          item.appendChild(checkbox);
+          item.appendChild(label);
+          list.appendChild(item);
+        });
+
+        sectionDiv.appendChild(list);
+        container.appendChild(sectionDiv);
+      });
+
+      loadChecklist();
+      updateProgress();
+    }
+
+    function getAllCheckboxes() {
+      return Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    }
+
+    function saveChecklist() {
+      const state = {};
+      getAllCheckboxes().forEach((checkbox) => {
+        state[checkbox.dataset.key] = checkbox.checked;
+      });
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    }
+
+    function loadChecklist() {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return;
+
+      const state = JSON.parse(saved);
+
+      getAllCheckboxes().forEach((checkbox) => {
+        checkbox.checked = !!state[checkbox.dataset.key];
+        checkbox.parentElement.classList.toggle("checked", checkbox.checked);
+      });
+    }
+
+    function updateProgress() {
+      const checkboxes = getAllCheckboxes();
+      const checked = checkboxes.filter((cb) => cb.checked).length;
+      document.getElementById("progressText").textContent = `${checked} / ${checkboxes.length} selesai`;
+    }
+
+    function toggleAll(value) {
+      getAllCheckboxes().forEach((checkbox) => {
+        checkbox.checked = value;
+        checkbox.parentElement.classList.toggle("checked", value);
+      });
+      saveChecklist();
+      updateProgress();
+    }
+
+    function resetChecklist() {
+      const confirmReset = confirm("Reset semua checklist?");
+      if (!confirmReset) return;
+      localStorage.removeItem(storageKey);
+      toggleAll(false);
+    }
+
+    document.addEventListener("DOMContentLoaded", buildChecklist);
+  </script>
+</body>
+</html>
