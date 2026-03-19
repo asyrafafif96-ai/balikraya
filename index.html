@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checklist Sofea</title>
+  <title>Checklist Balik Raya</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -14,6 +14,8 @@
       --primary: #16a34a;
       --primary-soft: #dcfce7;
       --danger: #dc2626;
+      --person-bg: #fdf2f8;
+      --person-line: #f9a8d4;
     }
 
     * {
@@ -28,7 +30,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 980px;
       margin: 32px auto;
       padding: 16px;
     }
@@ -98,15 +100,32 @@
       color: #0369a1;
     }
 
+    .person-block {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid var(--person-line);
+      background: var(--person-bg);
+      border-radius: 16px;
+    }
+
+    .person-title {
+      margin: 0 0 14px;
+      font-size: 24px;
+    }
+
     .section {
       border-top: 1px solid var(--line);
       padding-top: 18px;
       margin-top: 18px;
     }
 
-    .section h2 {
+    .section:first-of-type {
+      margin-top: 0;
+    }
+
+    .section h3 {
       margin: 0 0 12px;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .list {
@@ -121,7 +140,7 @@
       padding: 12px 14px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      background: #fcfcfd;
+      background: #ffffff;
     }
 
     .item input[type="checkbox"] {
@@ -159,6 +178,10 @@
         font-size: 24px;
       }
 
+      .person-title {
+        font-size: 20px;
+      }
+
       .card {
         padding: 16px;
       }
@@ -172,11 +195,11 @@
 <body>
   <div class="container">
     <div class="card">
-      <h1>Checklist Sofea</h1>
-      <p class="subtitle">Senarai barang untuk raya, harian, dan keperluan baby.</p>
+      <h1>Checklist Balik Raya</h1>
+      <p class="subtitle">Senarai barang untuk Sofea, Baba, dan Mama.</p>
 
       <div class="topbar">
-        <div class="progress-box" id="progressText">0 / 34 selesai</div>
+        <div class="progress-box" id="progressText">0 / 76 selesai</div>
         <div class="actions">
           <button class="btn-save" onclick="saveChecklist()">Simpan</button>
           <button class="btn-toggle" onclick="toggleAll(true)">Tick Semua</button>
@@ -187,120 +210,235 @@
 
       <div id="checklist"></div>
 
-      <p class="footer-note">
-        Checklist ini auto-save dalam browser.
-      </p>
+      <p class="footer-note">Checklist ini auto-save dalam browser.</p>
     </div>
   </div>
 
   <script>
     const checklistData = [
       {
-        title: "1. Baju raya",
-        items: [
-          "Pertama - Hijau & Dress nude tinybutton",
-          "Kedua - Purple",
-          "Ketiga - Pink"
+        person: "Sofea",
+        sections: [
+          {
+            title: "1. Baju raya",
+            items: [
+              "Pertama - Hijau & Dress nude tinybutton",
+              "Kedua - Purple",
+              "Ketiga - Pink"
+            ]
+          },
+          {
+            title: "2. Baju tidoq",
+            items: [
+              "babyshop - 5 pasang",
+              "bju aiskrim - 1 pasang",
+              "baju rabbit - 1 pasang"
+            ]
+          },
+          {
+            title: "3. Baju siang",
+            items: [
+              "7 pasang"
+            ]
+          },
+          {
+            title: "4. Baju jalan",
+            items: [
+              "Sweatshirt",
+              "Jeans biru n hitam",
+              "Baju skirt biru n nude",
+              "Baju tshirt putih"
+            ]
+          },
+          {
+            title: "5. Lain-lain",
+            items: [
+              "Selimut",
+              "Tuala",
+              "Kain bedung",
+              "Bib",
+              "Stokin",
+              "Tisu",
+              "Wet tisu",
+              "Ketip kuku",
+              "Rantai emas",
+              "Alatan makeup",
+              "Ubat-ubat",
+              "Kasut raya",
+              "Getah rambut",
+              "Gel rambut",
+              "Susu",
+              "Sabun botol",
+              "Sabun baju",
+              "Sudu",
+              "Pampers",
+              "Botol susu",
+              "Botol ayaq",
+              "Kain sapu tgn",
+              "Toto n bantal"
+            ]
+          }
         ]
       },
       {
-        title: "2. Baju tidoq",
-        items: [
-          "babyshop - 5 pasang",
-          "bju aiskrim - 1 pasang",
-          "baju rabbit - 1 pasang"
+        person: "Baba",
+        sections: [
+          {
+            title: "1. Baju raya",
+            items: [
+              "Pertama - Hijau",
+              "Kedua - Purple",
+              "Ketiga - Pink"
+            ]
+          },
+          {
+            title: "2. Baju tidoq",
+            items: [
+              "Tshirt",
+              "Seluar",
+              "Termasuk baju mandi pantai"
+            ]
+          },
+          {
+            title: "3. Baju siang",
+            items: [
+              "Baju tshirt hitam - p kendri",
+              "Seluar slack"
+            ]
+          },
+          {
+            title: "4. Lain-lain",
+            items: [
+              "Spender",
+              "Boxer",
+              "Pagoda",
+              "Berus gigi, ubat gigi, pencuci muka, sabun",
+              "Sikat, gel rambut, deodorant",
+              "Charger fon",
+              "Laptop",
+              "Tuala",
+              "Kain pelikat"
+            ]
+          }
         ]
       },
       {
-        title: "3. Baju siang",
-        items: [
-          "7 pasang"
-        ]
-      },
-      {
-        title: "4. Baju jalan",
-        items: [
-          "Sweatshirt",
-          "Jeans biru n hitam",
-          "Baju skirt biru n nude",
-          "Baju tshirt putih"
-        ]
-      },
-      {
-        title: "5. Lain-lain",
-        items: [
-          "Selimut",
-          "Tuala",
-          "Kain bedung",
-          "Bib",
-          "Stokin",
-          "Tisu",
-          "Wet tisu",
-          "Ketip kuku",
-          "Rantai emas",
-          "Alatan makeup",
-          "Ubat-ubat",
-          "Kasut raya",
-          "Getah rambut",
-          "Gel rambut",
-          "Susu",
-          "Sabun botol",
-          "Sabun baju",
-          "Sudu",
-          "Pampers",
-          "Botol susu",
-          "Botol ayaq",
-          "Kain sapu tgn",
-          "Toto n bantal"
+        person: "Mama",
+        sections: [
+          {
+            title: "1. Baju raya",
+            items: [
+              "Pertama - Hijau",
+              "Kedua - Purple",
+              "Ketiga - Pink"
+            ]
+          },
+          {
+            title: "2. Baju tidoq",
+            items: [
+              "Tshirt - 8 pasang",
+              "Seluar - 5 pasang",
+              "Termasuk baju mandi pantai"
+            ]
+          },
+          {
+            title: "3. Baju siang",
+            items: [
+              "Blouse - 5 pasang",
+              "Baju uniqlo hitam - 1 pasang",
+              "Seluar slack - 3 pasang"
+            ]
+          },
+          {
+            title: "4. Lain-lain",
+            items: [
+              "Panties",
+              "Bra",
+              "Sikat, deodorant, getah rambut, cekak",
+              "Kasut raya",
+              "Alatan makeup",
+              "Berus gigi, ubat gigi, pencuci muka, sabun, shampoo",
+              "Wet tisu",
+              "Telekung",
+              "Cincin",
+              "Tudung",
+              "Kerongsang n jarum",
+              "Sampul raya",
+              "Botol ayaq",
+              "Tuala",
+              "Plastik sampah",
+              "Kuih raya"
+            ]
+          }
         ]
       }
     ];
 
-    const storageKey = "checklist-sofea-v1";
+    const storageKey = "checklist-balikraya-v2";
+
+    function countTotalItems() {
+      return checklistData.reduce((total, person) => {
+        return total + person.sections.reduce((sectionTotal, section) => {
+          return sectionTotal + section.items.length;
+        }, 0);
+      }, 0);
+    }
 
     function buildChecklist() {
       const container = document.getElementById("checklist");
       container.innerHTML = "";
 
-      checklistData.forEach((section, sectionIndex) => {
-        const sectionDiv = document.createElement("div");
-        sectionDiv.className = "section";
+      checklistData.forEach((personGroup, personIndex) => {
+        const personBlock = document.createElement("div");
+        personBlock.className = "person-block";
 
-        const title = document.createElement("h2");
-        title.textContent = section.title;
-        sectionDiv.appendChild(title);
+        const personTitle = document.createElement("h2");
+        personTitle.className = "person-title";
+        personTitle.textContent = personGroup.person;
+        personBlock.appendChild(personTitle);
 
-        const list = document.createElement("div");
-        list.className = "list";
+        personGroup.sections.forEach((section, sectionIndex) => {
+          const sectionDiv = document.createElement("div");
+          sectionDiv.className = "section";
 
-        section.items.forEach((itemText, itemIndex) => {
-          const id = `item-${sectionIndex}-${itemIndex}`;
+          const title = document.createElement("h3");
+          title.textContent = section.title;
+          sectionDiv.appendChild(title);
 
-          const item = document.createElement("div");
-          item.className = "item";
+          const list = document.createElement("div");
+          list.className = "list";
 
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.id = id;
-          checkbox.dataset.key = id;
+          section.items.forEach((itemText, itemIndex) => {
+            const id = `item-${personIndex}-${sectionIndex}-${itemIndex}`;
 
-          const label = document.createElement("label");
-          label.htmlFor = id;
-          label.textContent = itemText;
+            const item = document.createElement("div");
+            item.className = "item";
 
-          checkbox.addEventListener("change", () => {
-            item.classList.toggle("checked", checkbox.checked);
-            saveChecklist();
-            updateProgress();
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = id;
+            checkbox.dataset.key = id;
+
+            const label = document.createElement("label");
+            label.htmlFor = id;
+            label.textContent = itemText;
+
+            checkbox.addEventListener("change", () => {
+              item.classList.toggle("checked", checkbox.checked);
+              saveChecklist();
+              updateProgress();
+            });
+
+            item.appendChild(checkbox);
+            item.appendChild(label);
+            list.appendChild(item);
           });
 
-          item.appendChild(checkbox);
-          item.appendChild(label);
-          list.appendChild(item);
+          sectionDiv.appendChild(list);
+          personBlock.appendChild(sectionDiv);
         });
 
-        sectionDiv.appendChild(list);
-        container.appendChild(sectionDiv);
+        container.appendChild(personBlock);
       });
 
       loadChecklist();
@@ -357,3 +495,4 @@
   </script>
 </body>
 </html>
+
