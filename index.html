@@ -14,8 +14,15 @@
       --primary: #16a34a;
       --primary-soft: #dcfce7;
       --danger: #dc2626;
-      --person-bg: #fdf2f8;
-      --person-line: #f9a8d4;
+
+      --sofea-bg: #fdf2f8;
+      --sofea-border: #f9a8d4;
+
+      --baba-bg: #eff6ff;
+      --baba-border: #93c5fd;
+
+      --mama-bg: #fefce8;
+      --mama-border: #facc15;
     }
 
     * {
@@ -25,7 +32,7 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #fdf2f8 0%, #f8fafc 100%);
+      background: linear-gradient(180deg, #fffafc 0%, #f8fafc 100%);
       color: var(--text);
     }
 
@@ -103,9 +110,23 @@
     .person-block {
       margin-top: 22px;
       padding: 18px;
-      border: 1px solid var(--person-line);
-      background: var(--person-bg);
+      border: 2px solid var(--line);
       border-radius: 16px;
+    }
+
+    .person-block.sofea {
+      background-color: var(--sofea-bg);
+      border-color: var(--sofea-border);
+    }
+
+    .person-block.baba {
+      background-color: var(--baba-bg);
+      border-color: var(--baba-border);
+    }
+
+    .person-block.mama {
+      background-color: var(--mama-bg);
+      border-color: var(--mama-border);
     }
 
     .person-title {
@@ -374,15 +395,7 @@
       }
     ];
 
-    const storageKey = "checklist-balikraya-v2";
-
-    function countTotalItems() {
-      return checklistData.reduce((total, person) => {
-        return total + person.sections.reduce((sectionTotal, section) => {
-          return sectionTotal + section.items.length;
-        }, 0);
-      }, 0);
-    }
+    const storageKey = "checklist-balikraya-v3";
 
     function buildChecklist() {
       const container = document.getElementById("checklist");
@@ -390,7 +403,8 @@
 
       checklistData.forEach((personGroup, personIndex) => {
         const personBlock = document.createElement("div");
-        personBlock.className = "person-block";
+        const personClass = personGroup.person.toLowerCase();
+        personBlock.className = `person-block ${personClass}`;
 
         const personTitle = document.createElement("h2");
         personTitle.className = "person-title";
@@ -495,4 +509,3 @@
   </script>
 </body>
 </html>
-
